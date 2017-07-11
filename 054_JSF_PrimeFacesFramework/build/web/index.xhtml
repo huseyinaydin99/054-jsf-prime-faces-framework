@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <style type="text/css">
+            button.keypad-trigger {
+                width: 25px;
+                padding: 0px;
+            }
+            img.keypad-trigger {
+                margin: 2px;
+                vertical-align: middle;
+            }
+            #keypad-div {
+                display: none;
+                z-index: 10;
+                margin: 0;
+                padding: 0;
+            }
+            .keypad-keyentry {
+                display: none;
+            }
+            .keypad-inline {
+                background-color: #f4f4f4;
+                border: 1px solid #888;
+                border-radius: 4px;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+            }
+            .keypad-disabled {
+                position: absolute;
+                z-index: 100;
+                background-color: white;
+                opacity: 0.5;
+                filter: alpha(opacity=50);
+            }
+            .keypad-rtl {
+                direction: rtl;
+            }
+            .keypad-prompt {
+                clear: both;
+                width: 100%;
+                text-align: center;
+            }
+            .keypad-row {
+                clear: both;
+                float: left;
+                width: 100%;
+            }
+            .keypad-space {
+                float: left;
+                margin: 2px;
+                width: 24px;
+            }
+            * html .keypad-space { /* IE6 */
+                margin: 0px;
+                width: 28px;
+            }
+            .keypad-half-space {
+                float: left;
+                margin: 1px;
+                width: 12px;
+            }
+            * html .keypad-half-space { /* IE6 */
+                margin: 0px;
+                width: 14px;
+            }
+            .keypad-key {
+                float: left;
+                margin: 2px;
+                padding: 0px;
+                width: 24px;
+                background-color: #f4f4f4;
+                border-radius: 4px;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+                text-align: center;
+                cursor: pointer;
+            }
+            .keypad-key[disabled] {
+                border: 2px outset;
+            }
+            .keypad-key-down {
+            }
+            .keypad-spacebar {
+                width: 164px;
+            }
+            .keypad-enter {
+                width: 52px;
+            }
+            .keypad-clear, .keypad-back, .keypad-close, .keypad-shift {
+                width: 52px;
+                color: #fff;
+                font-weight: bold;
+            }
+            .keypad-clear {
+                background-color: #a00;
+            }
+            .keypad-back {
+                background-color: #00a;
+            }
+            .keypad-close {
+                background-color: #0a0;
+            }
+            .keypad-shift {
+                background-color: #0aa;
+            }
+            .keypad-cover {
+                display: none;
+                display/**/: block;
+                position: absolute;
+                z-index: -1;
+                filter: mask();
+                top: -4px;
+                left: -4px;
+                width: 125px;
+                height: 200px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="Default Layout: " />
+                <p:keyboard id="default" value="#{keyboardView.value1}" />
+
+                <h:outputText value="Basic QWERTY: " />
+                <p:keyboard id="qwerty" value="#{keyboardView.value2}" layout="qwertyBasic" />
+
+                <h:outputText value="Alphabetic Layout: " />
+                <p:keyboard id="alphabetic" value="#{keyboardView.value3}" layout="alphabetic" />
+
+                <h:outputText value="Custom Layout 1: " />
+                <p:keyboard id="custom1" value="#{keyboardView.value4}" layout="custom" layoutTemplate="Hüseyin-Aydın,Bushcraft-Survival,Tavuk-Ben" />
+
+                <h:outputText value="Custom Layout 2: " />
+                <p:keyboard id="custom2" value="#{keyboardView.value5}" layout="custom" layoutTemplate="create-space-your-close,owntemplate-shift,easily-space-spacebar" />
+
+                <h:outputText value="Default Keypad: " />
+                <p:keyboard id="keypad" value="#{keyboardView.value6}" keypadOnly="true" />
+
+                <h:outputText value="Button Mode: " />
+                <p:keyboard id="buttonmode" value="#{keyboardView.value7}" showMode="button"  keypadOnly="true" />
+
+                <h:outputText value="Image Mode: " />
+                <p:keyboard id="image" value="#{keyboardView.value8}" showMode="button" buttonImageOnly="true"
+                            buttonImage="/resources/images/pencil.png" keypadOnly="true" />
+
+                <h:outputText value="Password Mode: " />
+                <p:keyboard id="password" value="#{keyboardView.value9}" password="true" keypadOnly="true" />
+            </h:panelGrid>
+            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" />
+
+            <p:dialog widgetVar="dlg" showEffect="fade" hideEffect="fade" header="Values">
+                <h:panelGrid id="display" columns="2" cellpadding="5">
+                    <h:outputText value="Value1: " />
+                    <h:outputText value="#{keyboardView.value1}" />
+
+                    <h:outputText value="Value2:" />
+                    <h:outputText value="#{keyboardView.value2}" />
+
+                    <h:outputText value="Value3:" />
+                    <h:outputText value="#{keyboardView.value3}" />
+
+                    <h:outputText value="Value4:" />
+                    <h:outputText value="#{keyboardView.value4}" />
+
+                    <h:outputText value="Value5:" />
+                    <h:outputText value="#{keyboardView.value5}" />
+
+                    <h:outputText value="Value6:" />
+                    <h:outputText value="#{keyboardView.value6}" />
+
+                    <h:outputText value="Value7:" />
+                    <h:outputText value="#{keyboardView.value7}" />
+
+                    <h:outputText value="Value8:" />
+                    <h:outputText value="#{keyboardView.value8}" />
+
+                    <h:outputText value="Value9:" />
+                    <h:outputText value="#{keyboardView.value9}" />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
